@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/sheet/tab-bar.dart';
 import 'package:myapp/timeline/timeline.dart';
 
 class _HomeNavigation extends State<HomeNavigation> {
@@ -48,20 +49,9 @@ class _HomeNavigation extends State<HomeNavigation> {
         /// Home page
         const TimelinePage(),
 
-           Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Sheet page',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
-          ),
-        ),
+        const SheetTabBar(),
 
-           Card(
+        Card(
           shadowColor: Colors.transparent,
           margin: const EdgeInsets.all(8.0),
           child: SizedBox.expand(
