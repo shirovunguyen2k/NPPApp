@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp/sheet/tasks-list.dart';
+import 'package:myapp/screens/home_screen/sheet/tasks-list.dart';
 
 class _TaskItemState extends State<TaskItem> {
   @override
@@ -43,7 +43,6 @@ class _TaskItemState extends State<TaskItem> {
                 width: 150,
                 fit: BoxFit.fitWidth,
               ),
-// Suggested code may be subject to a license. Learn more: ~LicenseLog:2439821483.
               TextButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(

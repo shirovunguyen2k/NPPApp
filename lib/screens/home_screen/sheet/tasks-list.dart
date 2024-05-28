@@ -2,7 +2,7 @@
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:3649466538.
 // Suggested code may be subject to a license. Learn more: ~LicenseLog:2032247667.
 import 'package:flutter/material.dart';
-import 'package:myapp/sheet/task-item.dart';
+import 'package:myapp/screens/home_screen/sheet/task-item.dart';
 
 class Task {
   final String title;

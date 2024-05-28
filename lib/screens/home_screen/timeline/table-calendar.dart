@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:myapp/utils.dart';
+import 'package:myapp/screens/home_screen/utils.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class _CalendarHeader extends StatelessWidget {
@@ -194,7 +194,7 @@ class _TimelineTableCalendar extends State<TimelineTableCalendar> {
         TableCalendar<Event>(
           calendarBuilders: CalendarBuilders(
             markerBuilder: (BuildContext context, date, events) {
-              if (events.isEmpty) return SizedBox();
+              if (events.isEmpty) return const SizedBox();
               return ListView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,

@@ -1,18 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/home-navigation-bar.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:myapp/features/user/repositories/auth_repository.dart';
+import 'package:myapp/screens/dashboard/dashboard_screen.dart';
+import 'package:myapp/screens/login_screen/login_screen.dart';
 
-/// Flutter code sample for [NavigationBar].
+void main() => runApp(const ProviderScope(child: NPPApp()));
 
-void main() => runApp(const NPPApp());
-
-class NPPApp extends StatelessWidget {
+class NPPApp extends HookConsumerWidget {
   const NPPApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true),
-      home: const HomeNavigation(),
+      debugShowCheckedModeBanner: false,
+      title: "NPP App",
+       home: ref
+          .watch(
+            getIsAuthenticatedProvider,
+          )
+          .when(
+            data: (bool isAuthenticated) =>
+                isAuthenticated ? const DashboardScreen() : const LoginScreen(),
+            loading: () {
+              return const Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            },
+            error: (error, stacktrace) => const LoginScreen(),
+          ),
+      routes: {
+        "Home": (context) => const DashboardScreen(),
+        "Login": (context) => const LoginScreen(),
+      },
     );
   }
 }

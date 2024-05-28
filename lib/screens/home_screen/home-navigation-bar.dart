@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/sheet/tab-bar.dart';
-import 'package:myapp/timeline/timeline.dart';
+import 'package:myapp/screens/home_screen/sheet/tab-bar.dart';
+import 'package:myapp/screens/home_screen/timeline/timeline.dart';
 
 class _HomeNavigation extends State<HomeNavigation> {
   int currentPageIndex = 0;
@@ -79,7 +79,7 @@ class _HomeNavigation extends State<HomeNavigation> {
               Card(
                 child: ListTile(
                   leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 2'),
+                  title: Text('tôi là vũ mập đây'),
                   subtitle: Text('This is a notification'),
                 ),
               ),
