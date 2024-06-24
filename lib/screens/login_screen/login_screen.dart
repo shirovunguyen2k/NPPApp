@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:myapp/features/user/providers/user_controller.dart';
 
@@ -32,9 +33,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         .login(email: email, password: password)
         .then((res) => {
               res.fold(
-                (l) => {
-                  showSnackbar(context, l),
-                },
+                (l) => {showSnackbar(context, l)},
                 (r) => {
                   Navigator.pushReplacementNamed(context, 'Home'),
                 },
@@ -43,11 +42,15 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   }
 
   void showSnackbar(BuildContext context, String text) {
-    final snackBar = SnackBar(
-      content: Text(text),
-      duration: const Duration(seconds: 5),
+    Fluttertoast.showToast(
+      msg: text,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM_LEFT,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
     );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override

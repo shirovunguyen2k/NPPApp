@@ -1,4 +1,6 @@
 class Endpoints {
-  static const String baseURL = "https://napro-api.azurewebsites.net/api/";
-  static const String loginURL = "users/login";
+  static const String baseURL = "napro-api.azurewebsites.net";
+  static const String loginURL = "/api/users/login";
+  static const String profileURL = "/api/users/profile";
+  static const String taskURL = "/api/tasks";
 }

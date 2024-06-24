@@ -12,17 +12,17 @@ class BaseResponse<T> {
   });
 
   factory BaseResponse.fromJson(
-      Map<String, dynamic> json, T Function(Map<String, dynamic>) converter) {
+      Map<String, dynamic> json, T Function(dynamic) converter) {
     return BaseResponse<T>(
-      statusCode: json['StatusCode'],
-      message: json['Message'],
-      totalRecord: json['TotalRecord'],
-      data: json['Data'] != null ? converter(json['Data']) : null,
+      statusCode: json['statusCode'],
+      message: json['message'],
+      totalRecord: json['totalRecord'],
+      data: json['data'] != null ? converter(json['data']) : null,
     );
   }
 }
 
 BaseResponse<T> convertResponse<T>(
-    Map<String, dynamic> json, T Function(Map<String, dynamic>) converter) {
+    Map<String, dynamic> json, T Function(dynamic) converter) {
   return BaseResponse<T>.fromJson(json, converter);
 }

@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:myapp/app_states/nav_states/nav_notifier.dart';
+import 'package:myapp/screens/home_screen/profile/user-profile.dart';
 import 'package:myapp/screens/home_screen/sheet/tab-bar.dart';
 import 'package:myapp/screens/home_screen/timeline/timeline.dart';
 
-class _HomeNavigation extends State<HomeNavigation> {
-  int currentPageIndex = 0;
+class HomeNavigation extends ConsumerStatefulWidget {
+  const HomeNavigation({super.key});
 
+  @override
+  ConsumerState<HomeNavigation> createState() => _HomeNavigation();
+}
+
+class _HomeNavigation extends ConsumerState<HomeNavigation> {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
+    var navIndex = ref.watch(navProvider);
     return Scaffold(
       bottomNavigationBar: NavigationBar(
         onDestinationSelected: (int index) {
-          setState(() {
-            currentPageIndex = index;
-          });
+          ref.read(navProvider.notifier).updateIndex(index);
         },
         indicatorColor: const Color.fromARGB(255, 32, 188, 240),
-        selectedIndex: currentPageIndex,
+        selectedIndex: navIndex.index,
         destinations: const <Widget>[
           NavigationDestination(
             selectedIcon: Icon(Icons.home),
@@ -51,18 +58,7 @@ class _HomeNavigation extends State<HomeNavigation> {
 
         const SheetTabBar(),
 
-        Card(
-          shadowColor: Colors.transparent,
-          margin: const EdgeInsets.all(8.0),
-          child: SizedBox.expand(
-            child: Center(
-              child: Text(
-                'Add Tasks',
-                style: theme.textTheme.titleLarge,
-              ),
-            ),
-          ),
-        ),
+        UserProfileScreen(),
 
         /// Notifications page
         const Padding(
@@ -128,14 +124,7 @@ class _HomeNavigation extends State<HomeNavigation> {
             );
           },
         ),
-      ][currentPageIndex],
+      ][navIndex.index],
     );
   }
-}
-
-class HomeNavigation extends StatefulWidget {
-  const HomeNavigation({super.key});
-
-  @override
-  State<HomeNavigation> createState() => _HomeNavigation();
 }

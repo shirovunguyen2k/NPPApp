@@ -8,7 +8,7 @@ class SheetTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
             appBar: AppBar(
               title: const Text("Sheet Page"),
@@ -28,6 +28,7 @@ class SheetTabBar extends StatelessWidget {
               TasksList(),
               Icon(Icons.directions_transit),
               Icon(Icons.directions_bike),
+              Icon(Icons.done_all),
             ])));
   }
 }

@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:myapp/features/user/data/user_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -55,11 +54,32 @@ final getAuthenticatedUserProvider = FutureProvider<UserResponse>(
   },
 );
 
+Future<void> saveAccessToken(String token) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.remove('accessToken');
+  await prefs.setString('accessToken', token);
+}
+
+Future<String?> getAccessToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('accessToken');
+}
+
+Future<void> removeAsscessToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.remove('accessToken');
+  await prefs.reload();
+}
+
+//
 // Todo: Handle logout or and reset
 final resetStorage = StateProvider<dynamic>(
   (ref) async {
     final prefs = await ref.watch(sharedPrefProvider);
     final isCleared = await prefs.clear();
+    await prefs.remove(AUTHENTICATED_USER_EMAIL_KEY);
+    await prefs.remove(IS_AUTHENTICATED_KEY);
+    await prefs.remove("accessToken");
     return isCleared;
   },
 );

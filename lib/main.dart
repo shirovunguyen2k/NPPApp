@@ -15,7 +15,7 @@ class NPPApp extends HookConsumerWidget {
       theme: ThemeData(useMaterial3: true),
       debugShowCheckedModeBanner: false,
       title: "NPP App",
-       home: ref
+      home: ref
           .watch(
             getIsAuthenticatedProvider,
           )
@@ -29,7 +29,7 @@ class NPPApp extends HookConsumerWidget {
                 ),
               );
             },
-            error: (error, stacktrace) => const LoginScreen(),
+            error: (error, stacktrace) => const Text("Error Page !"),
           ),
       routes: {
         "Home": (context) => const DashboardScreen(),

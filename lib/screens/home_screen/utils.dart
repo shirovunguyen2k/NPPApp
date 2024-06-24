@@ -3,6 +3,7 @@
 
 import 'dart:collection';
 
+import 'package:myapp/features/task/data/tasks_data.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 /// Example event class.
@@ -18,21 +19,31 @@ class Event {
 /// Example events.
 ///
 /// Using a [LinkedHashMap] is highly recommended if you decide to use a map.
-final kEvents = LinkedHashMap<DateTime, List<Event>>(
-  equals: isSameDay,
-  hashCode: getHashCode,
-)..addAll(_kEventSource);
+LinkedHashMap<DateTime, List<Event>> kEvents(List<TasksResponse> taskList) {
+  return LinkedHashMap<DateTime, List<Event>>(
+    equals: isSameDay,
+    hashCode: getHashCode,
+  )..addAll(getKEvents(taskList));
+}
 
-final _kEventSource = {
-  for (var item in List.generate(50, (index) => index))
-    DateTime.utc(kFirstDay.year, kFirstDay.month, item * 5): List.generate(
-        item % 4 + 1, (index) => Event('Event $item | ${index + 1}'))
-}..addAll({
-    kToday: [
-      const Event('Today\'s Event 1'),
-      const Event('Today\'s Event 2'),
-    ],
-  });
+Map<DateTime, List<Event>> getKEvents(List<TasksResponse> taskList) {
+  var eventMap = <DateTime, List<Event>>{};
+
+  for (var task in taskList) {
+    DateTime date = DateTime.parse(task.startDate as String);
+    String eventDescription =
+        '${task.project ?? "Lịch họp"} | ${task.title}';
+    Event event = Event(eventDescription);
+
+    if (eventMap.containsKey(date)) {
+      eventMap[date]!.add(event);
+    } else {
+      eventMap[date] = [event];
+    }
+  }
+
+  return eventMap;
+}
 
 int getHashCode(DateTime key) {
   return key.day * 1000000 + key.month * 10000 + key.year;

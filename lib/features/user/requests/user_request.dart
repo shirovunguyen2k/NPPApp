@@ -1,19 +1,19 @@
 class UserRequest {
   UserRequest({
-    required this.email,
+    required this.userName,
     required this.password,
   });
 
-  String email;
+  String userName;
   String password;
 
   factory UserRequest.fromJson(Map<String, dynamic> json) => UserRequest(
-        email: json["email"],
+        userName: json["userName"],
         password: json["password"],
       );
 
   Map<String, dynamic> toJson() => {
-        "email": email,
+        "userName": userName,
         "password": password,
       };
 }
